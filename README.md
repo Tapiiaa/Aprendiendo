@@ -1,5 +1,6 @@
 Actividad 1: Aprendiendo Kotlin
 Realicé un apartado en el proyecto para poner la sintaxis básica de Kotlin, ya que es un lenguaje nuevo a aprender
+Link a mi repositorio de github:https://github.com/Tapiiaa/Aprendiendo.git
 
 He realizado 3 main activities (con sus 3 layouts estilizados) para poder conectar tres pantallas (pantalla principal, pantalla de nombre y una tercera pantalla (no tiene funcionalidades)).
 La primera pantalla es un inicio de sesión
