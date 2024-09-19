@@ -12,15 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aprendiendo"
         tools:targetApi="31">
+
+        <!-- Declaración de la actividad principal -->
         <activity
-            android:name=".firstapp.FirstAppActivity"
+            android:name=".firstapppackage.FirstAppActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Declaración de la segunda actividad -->
+        <activity android:name=".firstapp.SecondActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,21 +1,28 @@
-package com.example.aprendiendo.firstapp
+package com.example.aprendiendo.firstapppackage
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import com.example.aprendiendo.firstapp.SecondActivity
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.os.Bundle
+import android.widget.Button
 import com.example.aprendiendo.R
 
 class FirstAppActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_first_app)// Llamamos al layout activity_first_app.xml -- res / layout
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.activity_first_app)
+
+        // Encuentra el botón por su ID
+        val reciclarButton: Button = findViewById(R.id.reciclarButton)
+
+        // Configura el click listener del botón
+        reciclarButton.setOnClickListener {
+            // Inicia la nueva actividad cuando el botón es presionado
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
     }
 }
+
+
