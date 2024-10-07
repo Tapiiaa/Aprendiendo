@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Actividad1" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Aplicacion_Reciclaje_Android" vcs="Git" />
   </component>
 </project>
