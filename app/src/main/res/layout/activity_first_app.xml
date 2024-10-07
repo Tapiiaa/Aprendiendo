@@ -11,13 +11,15 @@
         android:id="@+id/greetingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buenos días"
-        android:textSize="20sp"
         android:layout_marginTop="300dp"
         android:gravity="center"
+        android:text="Buenos días"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:layout_marginLeft="100dp" />
+        android:textSize="20sp"
+        android:layout_marginStart="50dp"
+
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -28,6 +30,7 @@
         android:layout_marginLeft="100dp"
         android:background="@color/teal_200"
         android:textColor="@color/white"
-        android:id="@+id/reciclarButton" />
+        android:id="@+id/reciclarButton"
+        android:layout_marginStart="50dp"/>
 
 </LinearLayout>
