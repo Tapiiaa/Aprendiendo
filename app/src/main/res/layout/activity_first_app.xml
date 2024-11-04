@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".firstapppackage.FirstAppActivity">
+    tools:context=".firstapp.FirstAppActivity">
 
     <TextView
         android:id="@+id/greetingTextView"

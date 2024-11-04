@@ -3,13 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_horizontal">
 
-    <TextView
+    <EditText
+        android:id="@+id/userNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su nombre"/>
+
+    <EditText
+        android:id="@+id/userAgeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su edad"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/buttonSaveUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Bienvenido a la Tercera Pantalla!"
-        android:textSize="24sp"
-        android:gravity="center" />
+        android:text="Guardar Usuario"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Contenedor para un gráfico de barras simple -->
+    <LinearLayout
+        android:id="@+id/barChartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom"/>
+
 </LinearLayout>
+

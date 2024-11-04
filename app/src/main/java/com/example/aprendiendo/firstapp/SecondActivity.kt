@@ -1,17 +1,15 @@
 package com.example.aprendiendo.firstapp
 
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.aprendiendo.R
-import com.example.aprendiendo.firstapppackage.FirstAppActivity
-import com.example.aprendiendo.firstapppackage.ThirdActivity
+import com.example.aprendiendo.firstapp.ThirdActivity
 
 class SecondActivity : AppCompatActivity() {
 
@@ -19,43 +17,17 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        // Referencias a los componentes de la UI
-        val layout: LinearLayout = findViewById(R.id.secondLayout)
-        val editTextName: EditText = findViewById(R.id.editTextName)
-        val textViewName: TextView = findViewById(R.id.textViewName)
-        val buttonSave: Button = findViewById(R.id.buttonSave)
-        val buttonThirdScreen: Button = findViewById(R.id.buttonThirdScreen)
-        val buttonBackToMain: Button = findViewById(R.id.buttonBackToMain)
-        val buttonChangeColorRed: Button = findViewById(R.id.buttonChangeColorRed)
-        val buttonChangeColorBlue: Button = findViewById(R.id.buttonChangeColorBlue)
-
-        // Listener para el botón de guardar
-        buttonSave.setOnClickListener {
-            val enteredName = editTextName.text.toString() // Obtener el nombre ingresado
-            textViewName.text = "Nombre ingresado: $enteredName" // Mostrar el nombre en el TextView
+        findViewById<Button>(R.id.buttonSave).setOnClickListener {
+            val name = findViewById<EditText>(R.id.editTextName).text.toString()
+            getSharedPreferences("app_prefs", Context.MODE_PRIVATE).edit().apply {
+                putString("user_name", name)
+                apply()
+            }
+            findViewById<TextView>(R.id.textViewName).text = name
         }
 
-        // Listener para navegar a la tercera pantalla
-        buttonThirdScreen.setOnClickListener {
-            val intent = Intent(this, ThirdActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Listener para volver a la pantalla de inicio
-        buttonBackToMain.setOnClickListener {
-            val intent = Intent(this, FirstAppActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Listener para cambiar el color del fondo a rojo
-        buttonChangeColorRed.setOnClickListener {
-            layout.setBackgroundColor(Color.RED)
-        }
-
-        // Listener para cambiar el color del fondo a azul
-        buttonChangeColorBlue.setOnClickListener {
-            layout.setBackgroundColor(Color.BLUE)
+        findViewById<Button>(R.id.buttonThirdScreen).setOnClickListener {
+            startActivity(Intent(this, ThirdActivity::class.java))
         }
     }
 }
-
