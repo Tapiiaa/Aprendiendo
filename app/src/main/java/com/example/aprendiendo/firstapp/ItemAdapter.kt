@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aprendiendo.R
+import com.example.aprendiendo.fragment.DetailFragment
 
 class ItemAdapter(
     private val context: Context,

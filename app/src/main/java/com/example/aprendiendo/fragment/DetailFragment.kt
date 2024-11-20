@@ -1,4 +1,4 @@
-package com.example.aprendiendo.firstapp
+package com.example.aprendiendo.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

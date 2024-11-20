@@ -1,4 +1,4 @@
-package com.example.aprendiendo.firstapp
+package com.example.aprendiendo.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aprendiendo.R
+import com.example.aprendiendo.firstapp.ItemAdapter
+import com.example.aprendiendo.firstapp.ItemRepository
 
 class ListFragment : Fragment() {
 

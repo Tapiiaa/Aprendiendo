@@ -1,14 +1,15 @@
-package com.example.aprendiendo.firstapp
+package com.example.aprendiendo.fragment
+
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aprendiendo.R
+import com.example.aprendiendo.firstapp.FavoritesAdapter
 
 class FavoritesFragment : Fragment() {
 
@@ -25,7 +26,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private lateinit var recyclerView: RecyclerView
-    private val favorites = mutableListOf<String>()
+    private val favoriteItems = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -35,17 +36,19 @@ class FavoritesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        arguments?.getStringArrayList(ARG_FAVORITES)?.let { favorites.addAll(it) }
+        // Recuperar favoritos pasados al fragmento
+        arguments?.getStringArrayList(ARG_FAVORITES)?.let { favoriteItems.addAll(it) }
 
-        val adapter = ItemAdapter(requireContext(), favorites, mutableListOf()) {}
+        // Configurar adaptador de favoritos
+        val adapter = FavoritesAdapter(requireContext(), favoriteItems)
         recyclerView.adapter = adapter
 
-        val backButton = view.findViewById<Button>(R.id.backButton)
+        // Configurar botón de volver
+        val backButton = view.findViewById<View>(R.id.backButton)
         backButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
         return view
     }
-
 }
