@@ -1,58 +1,54 @@
 package com.example.aprendiendo.firstapp
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.aprendiendo.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
-    private lateinit var listView: ListView
-    private lateinit var adapter: ArrayAdapter<String>
-    private val mutableItemList = mutableListOf<String>() // Lista mutable para el adaptador
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ItemAdapter
+    private val mutableItemList = mutableListOf<String>() // Lista principal
+    private val favoriteItems = mutableListOf<String>() // Lista de favoritos
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
-        listView = view.findViewById(R.id.listView)
 
-        // Inicializar la lista mutable desde ItemRepository
+        // Configurar RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Inicializar datos desde el repositorio
         mutableItemList.clear()
         mutableItemList.addAll(ItemRepository.getItems())
 
-        // Configurar el adaptador con la lista mutable
-        adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            mutableItemList
-        )
-        listView.adapter = adapter
+        // Configurar adaptador
+        adapter = ItemAdapter(requireContext(), mutableItemList, favoriteItems) {
+            ItemRepository.saveItems(mutableItemList) // Guardar cambios en el repositorio
+        }
+        recyclerView.adapter = adapter
 
-        // Configurar clics en los items
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val selectedItem = adapter.getItem(position) ?: return@setOnItemClickListener
-            val description = ItemRepository.getDescriptions()[selectedItem] ?: "Sin descripción disponible"
+        // Configurar botón para agregar ítems
+        val addButton = view.findViewById<Button>(R.id.addButton)
+        addButton.setOnClickListener { showAddItemDialog() }
 
-            val detailFragment = DetailFragment.newInstance(selectedItem, description)
+        // Configurar botón para ver favoritos
+        val favoritesButton = view.findViewById<Button>(R.id.favoritesButton)
+        favoritesButton.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, detailFragment)
+                .replace(R.id.fragmentContainer, FavoritesFragment.newInstance(favoriteItems))
                 .addToBackStack(null)
                 .commit()
         }
-
-        // Botón flotante para añadir items
-        val addButton = view.findViewById<FloatingActionButton>(R.id.addButton)
-        addButton.setOnClickListener { showAddItemDialog() }
 
         return view
     }
@@ -70,14 +66,11 @@ class ListFragment : Fragment() {
                 val description = itemDescriptionInput.text.toString()
 
                 if (name.isNotEmpty()) {
-                    ItemRepository.addItem(name, description) // Guardar en repositorio
-
-                    // Actualizar la lista mutable y el adaptador
+                    // Guardar ítem y descripción en el repositorio
+                    ItemRepository.addItem(name, description)
                     mutableItemList.clear()
                     mutableItemList.addAll(ItemRepository.getItems())
-                    adapter.notifyDataSetChanged() // Notificar cambios al adaptador
-
-                    updateWidget() // Actualizar widget
+                    adapter.notifyDataSetChanged() // Actualizar adaptador
                 }
             }
             .setNegativeButton("Cancelar", null)
@@ -85,15 +78,11 @@ class ListFragment : Fragment() {
             .show()
     }
 
-    private fun updateWidget() {
-        val appWidgetManager = AppWidgetManager.getInstance(requireContext())
-        val widgetProvider = ComponentName(requireContext(), WidgetProvider::class.java)
-        val appWidgetIds = appWidgetManager.getAppWidgetIds(widgetProvider)
-
-        val intent = Intent(requireContext(), WidgetProvider::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
-        requireContext().sendBroadcast(intent)
+    override fun onResume() {
+        super.onResume()
+        // Actualizar lista al volver al fragmento
+        mutableItemList.clear()
+        mutableItemList.addAll(ItemRepository.getItems())
+        adapter.notifyDataSetChanged()
     }
 }
-

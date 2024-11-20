@@ -39,7 +39,7 @@ object ItemRepository {
         }
     }
 
-    private fun saveItems(items: List<String>) {
+    fun saveItems(items: List<String>) {
         val itemsString = items.joinToString(",")
         preferences.edit().putString(ITEMS_KEY, itemsString).apply()
     }
