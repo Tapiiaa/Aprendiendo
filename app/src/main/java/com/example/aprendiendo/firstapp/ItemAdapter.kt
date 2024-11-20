@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aprendiendo.R
@@ -32,8 +31,20 @@ class ItemAdapter(
         val item = items[position]
         holder.itemName.text = item
 
+        // Configurar clic en el nombre del ítem para redirigir al DetailFragment
+        holder.itemName.setOnClickListener {
+            val description = ItemRepository.getDescriptions()[item] ?: "Sin descripción disponible"
+            val fragment = DetailFragment.newInstance(item, description)
+
+            // Cargar el fragmento de detalles
+            (context as? MainActivity)?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.fragmentContainer, fragment)
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+
+        // Configurar el botón de opciones
         holder.optionsButton.setOnClickListener {
-            // Mostrar opciones en un diálogo
             AlertDialog.Builder(context)
                 .setTitle("Opciones")
                 .setItems(arrayOf("Marcar como favorito", "Eliminar ítem")) { _, which ->
@@ -41,9 +52,6 @@ class ItemAdapter(
                         0 -> {
                             if (!favoriteItems.contains(item)) {
                                 favoriteItems.add(item)
-                                Toast.makeText(context, "$item añadido a favoritos", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(context, "$item ya está en favoritos", Toast.LENGTH_SHORT).show()
                             }
                         }
                         1 -> {
@@ -51,7 +59,6 @@ class ItemAdapter(
                             favoriteItems.remove(item)
                             notifyDataSetChanged()
                             onItemsUpdated()
-                            Toast.makeText(context, "$item eliminado", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
