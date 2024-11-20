@@ -9,4 +9,5 @@ La primera pantalla es un inicio de sesión
 La segunda pantalla pide el nombre de usuario y tiene dos botones para cambiar el fondo a azul o rojo. 
 
 
-Video y pdfs (Taller 3) subidos correctamente
+Video y pdfs (Taller 3) eliminado
+Pendiente: Subir video taller 4 (grabar pantalla)
