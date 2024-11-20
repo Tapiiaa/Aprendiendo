@@ -1,10 +1,10 @@
 package com.example.aprendiendo.firstapp
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.aprendiendo.R
@@ -31,12 +31,18 @@ class DetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_detail, container, false)
         val itemNameTextView = view.findViewById<TextView>(R.id.itemNameTextView)
         val itemDetailsTextView = view.findViewById<TextView>(R.id.itemDetailsTextView)
+        val backButton = view.findViewById<Button>(R.id.backButton)
 
         val name = arguments?.getString(ARG_ITEM_NAME)
         val details = arguments?.getString(ARG_ITEM_DETAILS)
 
         itemNameTextView.text = name
         itemDetailsTextView.text = details
+
+        // Configurar botón para regresar al fragmento de lista
+        backButton.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
 
         return view
     }

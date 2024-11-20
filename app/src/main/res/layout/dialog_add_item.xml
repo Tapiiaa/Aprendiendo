@@ -5,15 +5,20 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
+    <!-- Campo para ingresar el nombre del ítem -->
     <EditText
         android:id="@+id/itemNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del item" />
+        android:hint="Nombre del item"
+        android:inputType="text" />
 
+    <!-- Campo para ingresar la descripción del ítem -->
     <EditText
-        android:id="@+id/itemDetailInput"
+        android:id="@+id/itemDescriptionInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Detalles del item" />
+        android:hint="Descripción del item"
+        android:inputType="text"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

@@ -27,6 +27,7 @@ class ListFragment : Fragment() {
         listView = view.findViewById(R.id.listView)
 
         // Inicializar la lista mutable desde ItemRepository
+        mutableItemList.clear()
         mutableItemList.addAll(ItemRepository.getItems())
 
         // Configurar el adaptador con la lista mutable
@@ -39,16 +40,15 @@ class ListFragment : Fragment() {
 
         // Configurar clics en los items
         listView.setOnItemClickListener { _, _, position, _ ->
-            val selectedItem = adapter.getItem(position)
-            val description = "Descripción del item: $selectedItem" // Aquí puedes ajustar según los datos reales
+            val selectedItem = adapter.getItem(position) ?: return@setOnItemClickListener
+            val description = ItemRepository.getDescriptions()[selectedItem] ?: "Sin descripción disponible"
 
-            val detailFragment = DetailFragment.newInstance(selectedItem ?: "", description)
+            val detailFragment = DetailFragment.newInstance(selectedItem, description)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, detailFragment)
                 .addToBackStack(null)
                 .commit()
         }
-
 
         // Botón flotante para añadir items
         val addButton = view.findViewById<FloatingActionButton>(R.id.addButton)
@@ -60,14 +60,17 @@ class ListFragment : Fragment() {
     private fun showAddItemDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_item, null)
         val itemNameInput = dialogView.findViewById<android.widget.EditText>(R.id.itemNameInput)
+        val itemDescriptionInput = dialogView.findViewById<android.widget.EditText>(R.id.itemDescriptionInput)
 
         AlertDialog.Builder(requireContext())
             .setTitle("Agregar Nuevo Item")
             .setView(dialogView)
             .setPositiveButton("Guardar") { _, _ ->
                 val name = itemNameInput.text.toString()
+                val description = itemDescriptionInput.text.toString()
+
                 if (name.isNotEmpty()) {
-                    ItemRepository.addItem(name) // Guardar en repositorio
+                    ItemRepository.addItem(name, description) // Guardar en repositorio
 
                     // Actualizar la lista mutable y el adaptador
                     mutableItemList.clear()
@@ -93,3 +96,4 @@ class ListFragment : Fragment() {
         requireContext().sendBroadcast(intent)
     }
 }
+
