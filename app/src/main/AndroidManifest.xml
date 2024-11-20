@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Aprendiendo"
         tools:targetApi="31">
 
-        <!-- Declaración de la actividad principal -->
+        <!-- Declaración de la pantalla de inicio -->
         <activity
             android:name=".firstapp.FirstAppActivity"
             android:exported="true">
@@ -23,15 +23,15 @@
             </intent-filter>
         </activity>
 
-        <!-- Declaración de la segunda actividad -->
-        <activity android:name=".firstapp.SecondActivity"
-            android:exported="true">
-        </activity>
+        <!-- Declaración de la actividad principal -->
+        <activity
+            android:name=".firstapp.MainActivity"
+            android:exported="true" />
 
         <!-- Declaración de la tercera actividad -->
-        <activity android:name=".firstapp.ThirdActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".firstapp.ThirdActivity"
+            android:exported="true" />
 
     </application>
 

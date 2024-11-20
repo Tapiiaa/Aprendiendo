@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aprendiendo.R
-import com.example.aprendiendo.firstapp.SecondActivity
 import java.util.Calendar
 
 class FirstAppActivity : AppCompatActivity() {
@@ -15,10 +14,10 @@ class FirstAppActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_app)
 
-        setGreeting()  // Set the greeting based on the time of day
+        setGreeting()
 
         findViewById<Button>(R.id.reciclarButton).setOnClickListener {
-            startActivity(Intent(this, SecondActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

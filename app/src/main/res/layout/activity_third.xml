@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/userNameInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese su nombre"/>
-
-    <EditText
-        android:id="@+id/userAgeInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ingrese su edad"
-        android:inputType="number"/>
-
-    <Button
-        android:id="@+id/buttonSaveUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar Usuario"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Contenedor para un gráfico de barras simple -->
     <LinearLayout
-        android:id="@+id/barChartContainer"
+        android:id="@+id/thirdActivityLayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal"
-        android:gravity="bottom"/>
+        android:layout_height="wrap_content">
 
-    <!-- ScrollView para visualizar datos ingresados -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:id="@+id/barChartContainer"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#DDDDDD"
+            android:padding="8dp" />
+
         <TextView
             android:id="@+id/dataDisplay"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre, Edad\n"/>
-    </ScrollView>
+            android:padding="8dp"
+            android:background="#EEEEEE"
+            android:text="Datos:"
+            android:textSize="16sp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/userNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del usuario" />
 
+        <EditText
+            android:id="@+id/userAgeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Edad del usuario" />
+
+        <Button
+            android:id="@+id/buttonSaveUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar usuario" />
+    </LinearLayout>
+</ScrollView>
 
