@@ -10,7 +10,4 @@ La segunda pantalla pide el nombre de usuario y tiene dos botones para cambiar e
 
 Actualizado (Taller 4):
 Se elimino la third activity, y se implementaron nuevas pantallas, para agregar items, marcarlos como favoritos, mostrarlos todos (con nombre y descripción). También se puede agregar un widget, donde se muestran todos los items que están agregados en la app.
-
-
-Video y pdfs (Taller 3) eliminado
-Pendiente: Subir video taller 4 (grabar pantalla)
+Subido video taller 4
